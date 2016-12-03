@@ -1,0 +1,112 @@
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2016',
+            dateFormat: "yy-mm-dd",
+            minDate: new Date(1950, 10 - 1, 25),
+        });
+    });
+</script>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <a href="#/main" id="logo" class="navbar-brand">Xplore</a>
+        <button id="main-toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <li><a href="#/user "> <h4>Home</h4></a></li>
+                <li><a ng-click="model.logout()"> <h4>Logout</h4></a></li>
+                <li><a ng-click="model.unregister()"> <h4>Delete Account</h4></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container thumbnail" id="editProfilePage">
+    <h2>Edit Profile</h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <img id="searchImage" ng-src="{{model.user.displayPicture}}"  class="img-rounded">
+            <form action="/api/project/uploads"  method="post" enctype="multipart/form-data">
+                <input  required name="myImgFile"   type="file" class="form-control" placeholder="Add a display picture"/>
+                <input  name="userId" value="{{model.user._id}}" style="display: none"/>
+                <button type="submit"   class="btn btn-block btn-primary">Upload & Save Image</button>
+            </form>
+            <button ng-click="model.deleteImage()" class="btn btn-block btn-danger">Delete Image</button>
+            <div ng-show= "model.imgDeleteError"
+                 class="errorAlert alert alert-danger"
+                 role="alert"><strong>Error !!</strong> {{model.imgDeleteError}}</div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
+            <form>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input ng-model="model.user.firstName"
+                           type="text"
+                           required
+                           name="firstName"
+                           id="firstName"
+                           class="form-control input-sm"
+                           placeholder="*First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input ng-model="model.user.lastName"
+                           type="text"
+                           name="lastName"
+                           id="lastName"
+                           class="form-control input-sm"
+                           required placeholder="*Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input ng-model="model.user.username"
+                           type="text"
+                           name="username"
+                           id="username"
+                           class="form-control input-sm"
+                           required placeholder="*Username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input ng-model="model.user.email"
+                           type="email"
+                           name="email"
+                           id="email"
+                           class="form-control input-sm"
+                           required placeholder="*Email Address">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select ng-model="model.user.gender"
+                            type="text"
+                            name="gender"
+                            id="gender"
+                            class="form-control input-sm"
+                            required placeholder="*Gender">
+                        <option value="" default selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="datepicker">Date Of Birth</label>
+                    <input ng-model="model.user.dob"
+                           class="form-control input-sm"
+                           name="dob"
+                           placeholder="*Date Of Birth"
+                           id="datepicker"
+                           default="model.user.dob"
+                           required type="text"/>
+                </div>
+                <button type="submit"
+                        ng-click="model.updateUser()"
+                        class="btn btn-success pull-right">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

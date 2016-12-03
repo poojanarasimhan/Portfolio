@@ -1,0 +1,21 @@
+<div ng-if="model.error" class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Error!</strong> {{model.error}}
+</div>
+<div ng-switch="model.widget.type">
+    <div ng-switch-when="HEADING">
+        <ng-include src="'views/widget/widget-heading.view.client.html'"/>
+    </div>
+    <div ng-switch-when="IMAGE">
+        <ng-include src="'views/widget/widget-image.view.client.html'"/>
+    </div>
+    <div ng-switch-when="YOUTUBE">
+        <ng-include src="'views/widget/widget-youtube.view.client.html'"/>
+    </div>
+    <div ng-switch-when="HTML">
+        <ng-include src="'views/widget/widget-html-edit.view.client.html'"/>
+    </div>
+    <div ng-switch-when="INPUT">
+        <ng-include src="'views/widget/widget-input-edit.view.client.html'"/>
+    </div>
+</div>
